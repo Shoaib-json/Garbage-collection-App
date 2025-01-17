@@ -40,7 +40,7 @@ router.post(
     passport.authenticate("local", {
         failureRedirect: "/user", // Redirect to '/log' if authentication fails
         // failureFlash: true, // Enable flash messages on failure
-        successRedirect: "/user/address", 
+        successRedirect: "/re/scrap", 
         failureMessage: true, // Provide a failure message
     }),
     async (req, res, next) => {

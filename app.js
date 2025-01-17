@@ -13,7 +13,8 @@ const User  = require("./models/user.js");
 
 
 const user = require("./router/login.js");
-const list = require ("./router/list.js")
+const list = require ("./router/list.js");
+const scrap = require("./router/scrap.js")
 
 
 
@@ -71,6 +72,7 @@ app.use((req,res,next)=>{
 
 app.use("/", list );
 app.use("/user", user );
+app.use("/re", scrap);
 
 
 
