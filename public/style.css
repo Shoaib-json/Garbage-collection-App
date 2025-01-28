@@ -1,0 +1,248 @@
+:root {
+    --primary-green: #27ae60;
+    --text-dark: #2c3e50;
+    --bg-white: #ffffff;
+    --transition-speed: 0.3s;
+}
+
+.navbar {
+    padding: 0.5rem 1rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.navbar-brand {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.navbar-brand i {
+    color: var(--primary-green);
+    margin-right: 0.5rem;
+}
+
+.nav-link {
+    color: var(--text-dark) !important;
+    position: relative;
+    transition: color var(--transition-speed) ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-green) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-green);
+    transition: width var(--transition-speed) ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.btn-outline-dark {
+    border-color: var(--text-dark);
+    color: var(--text-dark);
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-dark {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-outline-dark:hover {
+    background-color: var(--text-dark);
+    color: white !important;
+}
+
+.btn-dark:hover {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}
+
+@media (max-width: 991px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    
+    .d-flex {
+        flex-direction: column;
+        align-items: center !important;
+    }
+    
+    .btn {
+        margin: 0.5rem 0;
+    }
+}
+
+:root {
+    --primary-green: #27ae60;
+    --secondary-green: #2ecc71;
+    --text-dark: #2c3e50;
+    --text-light: #ecf0f1;
+    --bg-white: #ffffff;
+    --transition-speed: 0.3s;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--primary-green);
+    color: var(--text-light);
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+header h1 {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.hero {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.hero h1 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.features {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.feature {
+    flex: 1;
+    text-align: center;
+    background-color: var(--bg-white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform var(--transition-speed);
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+}
+
+.feature img {
+    max-width: 100px;
+    margin-bottom: 1rem;
+}
+
+footer {
+    background-color: var(--text-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 1rem;
+}
+
+footer a {
+    color: var(--secondary-green);
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+    }
+}
+
+:root {
+    --primary-green: #27ae60;
+    --text-dark: #2c3e50;
+    --bg-light: #f4f4f4;
+    --white: #ffffff;
+}
+
+.clean-service-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: var(--bg-light);
+    padding: 2rem;
+}
+
+.clean-service-form {
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.clean-service-form h1 {
+    text-align: center;
+    color: var(--primary-green);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-green);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #2ecc71;
+}
+
+@media (max-width: 600px) {
+    .clean-service-form {
+        padding: 1.5rem;
+    }
+}

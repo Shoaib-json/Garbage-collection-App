@@ -21,10 +21,12 @@ router.post("/sign" ,async (req,res,next)=>{
             username : username 
         });
         let Q  = await User.register(user,password);
+        req.flash("success" , "you are loggedin")
         req.login(Q,(err)=>{
             if(err){
                 console.log(err);
             }else{
+                req.flash("success" , "you are loggedin")
                 res.redirect("/user/address");
                 console.log(Q)
             }
@@ -39,8 +41,8 @@ router.post(
     "/login",
     passport.authenticate("local", {
         failureRedirect: "/user", // Redirect to '/log' if authentication fails
-        // failureFlash: true, // Enable flash messages on failure
-        successRedirect: "/re/scrap", 
+        failureFlash: true, // Enable flash messages on failure
+        successRedirect: "/", 
         failureMessage: true, // Provide a failure message
     }),
     async (req, res, next) => {
@@ -61,6 +63,7 @@ router.post("/:id" , async (req,res) =>{
     let q = await User.findById(req.params.id);
     q.address.push(add1);
     await q.save();
+    req.flash("success" , "you are loggedin")
     res.send("submitted");
     console.log(q);
     

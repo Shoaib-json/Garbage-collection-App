@@ -5,7 +5,7 @@ module.exports.check = (req, res, next) => {
     if (!req.isAuthenticated()) {
         req.session.redirectUrl = req.originalUrl;
         req.flash("success", "You need to log in first"); 
-        return res.send("Success")
+        res.redirect("/user/log")
     }
     next(); 
 };

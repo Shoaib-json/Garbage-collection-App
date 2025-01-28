@@ -5,54 +5,38 @@
             <i class="bi bi-recycle me-2"></i>
             <h4 class="mb-0">RecycleConnect</h4>
         </a>
-  
+        
         <!-- Toggler for Mobile View -->
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-  
+        
         <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- Search Bar -->
-            <div class="mx-auto d-flex align-items-center">
-                <form class="d-flex border rounded-pill shadow-sm" style="max-width: 500px; width: 100%;" method="get" action="/search">
-                    <input class="form-control border-0 rounded-pill ps-3" type="text" placeholder="Search recycled products or services" aria-label="Search" name="search">
-                    <button class="btn btn-light border-0 rounded-pill" type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </form>
+            <!-- Navbar Navigation Items -->
+            <div class="navbar-nav mx-auto">
+                <a class="nav-link text-dark fw-semibold" href="/">Home</a>
+                <a class="nav-link text-dark fw-semibold" href="/about">About</a>
+                <a class="nav-link text-dark fw-semibold" href="/clean/form">Services</a>
+                <a class="nav-link text-dark fw-semibold" href="/contact">Contact</a>
             </div>
-  
-            <!-- Navbar Items -->
-            <div class="navbar-nav ms-auto d-flex align-items-center">
-                <a class="nav-link text-dark fw-semibold me-3" href="/host">
-                    <i class="bi bi-plus-circle me-1"></i>Host a Recycling Event
-                </a>
-                <a class="nav-link text-dark fw-semibold me-3" href="/list">
-                    <i class="bi bi-card-list me-1"></i>My Listings
-                </a>
-                <a class="nav-link text-dark me-3" href="/resources">
-                    <i class="bi bi-book fs-5"></i>Resources
-                </a>
-  
-                <!-- Login/Logout Buttons -->
-                <div class="d-flex align-items-center">
-                  <%if(!currUser){%>
+            
+            <!-- Login/Logout Buttons -->
+            <div class="d-flex align-items-center">
+                <%if(!currUser){%>
                     <a href="/user/log" class="btn btn-outline-dark rounded-pill me-2">
                         <i class="bi bi-box-arrow-in-right me-1"></i>Login
                     </a>
-                    <a href="/user/signup" class="btn btn-dark rounded-pill">
+                    <a href="/user/sign" class="btn btn-dark rounded-pill">
                         <i class="bi bi-person-plus me-1"></i>Sign Up
                     </a>
-                  <%}%>
-                  <%if(currUser){%>
-                     <a href="/user/logout" class="btn btn-dark rounded-pill">
-                      <i class="bi bi-box-arrow-left me-1"></i>Logout
-                     </a>
-                   <%}%>
-                </div>
+                <%}%>
+                <%if(currUser){%>
+                    <a href="/user/logout" class="btn btn-dark rounded-pill">
+                        <i class="bi bi-box-arrow-left me-1"></i>Logout
+                    </a>
+                <%}%>
             </div>
         </div>
     </div>
-  </nav>
-  
+</nav>

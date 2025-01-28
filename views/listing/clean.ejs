@@ -1,0 +1,39 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="clean-service-container">
+    <form action="/clean/submit" method="POST" class="clean-service-form">
+        <h1>Book a Clean Service</h1>
+        
+        <!-- Service Category -->
+        <div class="form-group">
+            <label for="category">Service Category</label>
+            <select id="category" name="service" class="form-control" required>
+                <option value="" disabled selected>Select a service</option>
+                <option value="home-clean">Home Cleaning</option>
+                <option value="garden-work">Garden Maintenance</option>
+                <option value="waste-management">Waste Management</option>
+                <option value="recycling-pickup">Recycling Pickup</option>
+            </select>
+        </div>
+        
+        <!-- Date Selection -->
+        <div class="form-group">
+            <label for="date">Preferred Date</label>
+            <input type="date" id="date" name="date" class="form-control" required>
+        </div>
+        
+        <!-- Time Selection -->
+        <div class="form-group">
+            <label for="time">Preferred Time</label>
+            <input type="time" id="time" name="time" class="form-control" required>
+        </div>
+        
+        <!-- Additional Details -->
+        <div class="form-group">
+            <label for="details">Additional Notes</label>
+            <textarea id="details" name="details" class="form-control" placeholder="Any specific instructions?"></textarea>
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="btn-submit">Book Service</button>
+    </form>
+</div>

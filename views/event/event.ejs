@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Link to become a host -->
+    <button><a href="/event/host">Become a Host</a></button>
+
+    <% if (q && q.length > 0) { %>
+        <% for (let p of q) { %>
+            <div class="event">
+                <h2><%= p.name %></h2>
+                <p><strong>Description:</strong> <%= p.description %></p>
+                <p><strong>User:</strong> <%= p.user.username %></p>
+                <p><strong>Address:</strong> <%= p.address.city %>, <%= p.address.country %>, <%= p.address.place %></p>
+                <img src="<%= p.poster.url %>" alt="Event Image" width="200">
+            </div>
+            <hr>
+        <% } %>
+    <% } else { %>
+        <p>No events available.</p>
+    <% } %>
+</body>
+</html>
