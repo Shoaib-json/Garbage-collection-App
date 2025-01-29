@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const {check} = require("../utils/middleware");
 const Event = require("../models/event");
+const User = require("../models/user");
 
 router.get("/" , async(req,res) =>{
     const q = await Event.find({})
-    .populate("user");
+    .populate('user');
     console.log(q);
     res.render("./event/event.ejs", {q});
 });
@@ -19,6 +20,16 @@ router.post("/create-post" , async (req,res) =>{
     await newEvent.save();
     console.log(newEvent);
     res.redirect("/event");
-})
+});
+
+router.put("/:id" , check , async (req,res) =>{
+    let p = await User.findById(req.params.id);
+    let q = Event.findByIdAndUpdate(req.params.id,
+        { enroll: req.user._id },
+        { new: true })
+    // let r = await q.save();
+    console.log(q);
+    res.redirect("/event");
+});
 
 module.exports = router;

@@ -28,7 +28,12 @@ const eventSchema = mongoose.Schema({
         type : String ,
         default : "Event",
         require : true
-    }
+    },
+    enroll :[{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User"
+    }]
+
 });
 
 const Event = new mongoose.model('Event' , eventSchema);

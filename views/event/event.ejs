@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<% layout("/layouts/boilerplate") -%>
 <body>
     <!-- Link to become a host -->
     <button><a href="/event/host">Become a Host</a></button>
@@ -14,9 +8,14 @@
             <div class="event">
                 <h2><%= p.name %></h2>
                 <p><strong>Description:</strong> <%= p.description %></p>
-                <p><strong>User:</strong> <%= p.user.username %></p>
+                <p><strong>Host:</strong> <%= p.user ? p.user.username : 'Unknown Host' %></p>
+
                 <p><strong>Address:</strong> <%= p.address.city %>, <%= p.address.country %>, <%= p.address.place %></p>
+                <p><strong>Date:</strong> <%= new Date(p.date).toLocaleDateString("en-IN", { year: 'numeric', month: '2-digit', day: '2-digit' }) %></p>
                 <img src="<%= p.poster.url %>" alt="Event Image" width="200">
+                <form method="post" action="/event/<%= p._id %>?_method=PUT">
+                    <button type="submit">Enroll</button>
+                </form>
             </div>
             <hr>
         <% } %>
