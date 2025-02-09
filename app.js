@@ -16,7 +16,8 @@ const user = require("./router/login.js");
 const list = require ("./router/list.js");
 const scrap = require("./router/scrap.js");
 const clean = require("./router/clean.js");
-const event  = require("./router/event.js")
+const event  = require("./router/event.js");
+const community = require("./router/community.js")
 
 
 
@@ -77,6 +78,7 @@ app.use("/user", user );
 app.use("/re", scrap);
 app.use("/clean" , clean);
 app.use("/event" , event);
+app.use("/community" , community);
 
 
 
