@@ -27,7 +27,7 @@ app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({extended : true}));
 app.use(express.static(path.join(__dirname,'public')));
 app.use(methodOverride("_method"));
-app.engine('ejs', ejsMate);
+app.engine('ejs', ejsMate); 
 
 
 main().then(()=>{
@@ -69,7 +69,7 @@ app.use((req,res,next)=>{
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
     res.locals.Error = req.flash("Error");
-    res.locals.currUser = req.session.user || null;
+    res.locals.currUser =  req.user || null;
     next()
 })
 

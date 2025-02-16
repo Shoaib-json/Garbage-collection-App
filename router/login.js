@@ -40,14 +40,14 @@ router.post("/sign" ,async (req,res,next)=>{
 router.post(
     "/login",
     passport.authenticate("local", {
-        failureRedirect: "/user", // Redirect to '/log' if authentication fails
+        failureRedirect: "/user/log", // Redirect to '/log' if authentication fails
         failureFlash: true, // Enable flash messages on failure
         successRedirect: "/", 
         failureMessage: true, // Provide a failure message
     }),
     async (req, res, next) => {
         
-        res.send("loggedin")
+       console.log(currUser);
         
     }
 );
@@ -64,7 +64,7 @@ router.post("/:id" , async (req,res) =>{
     q.address.push(add1);
     await q.save();
     req.flash("success" , "you are loggedin")
-    res.send("submitted");
+    res.redirect("/")
     console.log(q);
     
 });
@@ -75,7 +75,7 @@ router.get("/logout", (req, res, next) => {
     req.logout((err) => {
         if (err) {
             return next(err);
-        }else{res.send("loggged out")}
+        }else{res.redirect("/")}
         // req.flash("Error", "You are loggedOut");
         
     });

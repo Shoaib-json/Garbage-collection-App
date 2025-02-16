@@ -25,10 +25,12 @@ router.post("/create-post" , async (req,res) =>{
 router.put("/:id" , check , async (req,res) =>{
     let p = await User.findById(req.params.id);
     let q = Event.findByIdAndUpdate(req.params.id,
-        { enroll: req.user._id },
-        { new: true })
+        {...req.body , enroll : p },
+        { new: true });
+    
+    // await q.save();
     // let r = await q.save();
-    console.log(q);
+    console.log(p);
     res.redirect("/event");
 });
 
