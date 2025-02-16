@@ -22,16 +22,22 @@ router.post("/create-post" , async (req,res) =>{
     res.redirect("/event");
 });
 
-router.put("/:id" , check , async (req,res) =>{
-    let p = await User.findById(req.params.id);
-    let q = Event.findByIdAndUpdate(req.params.id,
-        {...req.body , enroll : p },
-        { new: true });
-    
-    // await q.save();
-    // let r = await q.save();
-    console.log(p);
-    res.redirect("/event");
-});
+router.put("/:id", check, async (req, res) => {
+    try {
+      let updatedEvent = await Event.findByIdAndUpdate(
+        req.params.id,
+        { $addToSet: { enroll: { user: req.user._id } } }, // Prevents duplicate enrollments
+        { new: true }
+      );
+  
+      if (!updatedEvent) return res.status(404).send("Event not found");
+  
+      res.json(updatedEvent); // Respond with updated event
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+  
 
 module.exports = router;

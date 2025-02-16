@@ -29,10 +29,14 @@ const eventSchema = mongoose.Schema({
         default : "Event",
         require : true
     },
-    enroll :[{
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "User"
-    }]
+    enroll: [
+        {
+          user: {
+            type: String, // You can use ObjectId if referring to a User model
+            required: true,
+          },
+        },
+      ]
 
 });
 
