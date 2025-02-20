@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate") -%>
 <body>
     <h1>Create Event</h1>
-    <form action="/event/create-post" method="POST" >
+    <form action="/event/create-post" method="POST" enctype="multipart/form-data">
         <!-- Address Section -->
         <fieldset>
             <legend>Address</legend>
@@ -30,10 +30,8 @@
         <fieldset>
             <legend>Poster</legend>
             <label for="url">Poster URL:</label>
-            <input  id="url" name="poster[url]" required>
-            <br>
-            <label for="filename">Poster Filename:</label>
-            <input type="text" id="filename" name="poster[filename]" value="poster101" required>
+            <input  id="url" name="poster" type="file" required>
+            
         </fieldset>
         <br>
 

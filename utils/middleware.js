@@ -10,3 +10,10 @@ module.exports.check = (req, res, next) => {
 
     next(); // Proceed to the next middleware or route handler
 };
+
+module.exports.saveRedirectUrl = (req, res, next) => {
+    if (req.session.redirectUrl) {
+        res.locals.redirectUrl = req.session.redirectUrl; 
+    }
+    next(); 
+};

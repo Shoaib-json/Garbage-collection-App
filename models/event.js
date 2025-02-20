@@ -21,8 +21,8 @@ const eventSchema = mongoose.Schema({
         require : true 
     },
     poster :{
-        url : {type : String , require : true},
-        filename : {type: String , default : "poster101" , require : true}
+        url : {type : String , required: true},
+        filename : {type: String , default : "poster101" , required : true}
     },
     name : {
         type : String ,
@@ -32,8 +32,8 @@ const eventSchema = mongoose.Schema({
     enroll: [
         {
           user: {
-            type: String, // You can use ObjectId if referring to a User model
-            required: true,
+            type: String, 
+           default : "admin"
           },
         },
       ]

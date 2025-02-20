@@ -9,6 +9,10 @@ const ejsMate = require("ejs-mate");
 const flash = require('connect-flash');
 const session = require("express-session");
 const User  = require("./models/user.js");
+const {errorH} = require("./utils/error.js");
+const helmet = require("helmet");
+
+require('dotenv').config();
 
 
 
@@ -17,10 +21,11 @@ const list = require ("./router/list.js");
 const scrap = require("./router/scrap.js");
 const clean = require("./router/clean.js");
 const event  = require("./router/event.js");
-const community = require("./router/community.js")
+const community = require("./router/community.js");
 
 
 
+app.use(helmet({ contentSecurityPolicy: false }));
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
@@ -35,12 +40,12 @@ main().then(()=>{
 }).catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/reuse');
+  await mongoose.connect(process.env.DB_CODE);
 }
 
 
 const sessionOpp = {
-    secret : "truck",
+    secret : process.env.SESSION_SECRET,
     resave : false,
     saveUninitialized: true,
     cookie :{
@@ -80,6 +85,16 @@ app.use("/clean" , clean);
 app.use("/event" , event);
 app.use("/community" , community);
 
+app.all("*",(req,res)=>{
+    let  message = " Page not found"
+    res.render("./listing/notfound.ejs" , {message})
+})
+
+
+app.use((err ,req, res, next)=>{
+    // let{status=404, message = "not found"} = err;
+    res.json(err);
+})
 
 
 app.listen(8080 ,(req,res)=>{

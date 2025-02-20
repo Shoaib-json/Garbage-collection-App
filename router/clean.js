@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Clean = require("../models/clean");
-const {check} = require("../utils/middleware");
+const {check , saveRedirectUrl} = require("../utils/middleware");
 
 router.get("/form",(req,res) =>{
     res.render("./listing/clean.ejs");
