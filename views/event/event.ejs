@@ -14,8 +14,6 @@
                 <p><strong>Date:</strong> <%= new Date(p.date).toLocaleDateString("en-IN", { year: 'numeric', month: '2-digit', day: '2-digit' }) %></p>
                 <img src="<%= p.poster.url %>" alt="Event Image" width="200">
                 <form method="post" action="/event/<%= p._id %>?_method=PUT">
-                    <% let count = 0 ; %>
-                    <%= count++ %>
                     <button type="submit">Enroll</button>
                 </form>
             </div>

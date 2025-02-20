@@ -4,6 +4,7 @@ const User  = require("../models/user.js");
 const passport = require("passport");
 const { check }  = require("../utils/middleware.js")
 const Address  = require("../models/address.js");
+const Community = require('../models/community.js');
 
 router.get("/log" , (req,res) =>{
     res.render("./listing/login.ejs")
@@ -36,6 +37,11 @@ router.post("/sign" ,async (req,res,next)=>{
         next();
     }
 });
+
+router.get("/admin" , async (req,res)=>{
+
+    res.render("./listing/user.ejs");
+})
 
 router.post(
     "/login",
@@ -81,5 +87,31 @@ router.get("/logout", (req, res, next) => {
     });
 });
 
-
+router.put("/:id/like", check, async (req, res) => {
+    try {
+      const postId = req.params.id;
+      const userId = req.user._id; // Ensure this is a valid ObjectId
+  
+      // Convert userId to ObjectId if it's not already
+      const userObjectId = new mongoose.Types.ObjectId(userId);
+  
+      // Update the post, ensuring likes is an array of ObjectIds
+      let updatedPost = await Community.findByIdAndUpdate(
+        postId,
+        { $addToSet: { likes: userObjectId } }, // $addToSet prevents duplicate likes
+        { new: true, useFindAndModify: false }
+      );
+  
+      if (!updatedPost) {
+        return res.status(404).send("Post not found");
+      }
+  
+      console.log(updatedPost);
+      res.send("Liked");
+    } catch (err) {
+      console.error("Error liking post:", err);
+      res.status(500).send("Server error");
+    }
+  });
+  
 module.exports = router;

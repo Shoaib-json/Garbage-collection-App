@@ -4,6 +4,9 @@
         <h2><%= q.caption %></h2>
         <img src="<%= q.image.url %>" alt="Event Image" width="200">
     </div>
+    <form action="/user/<%=q._id%>/like?_method=PUT" method="post">
+        <button type="submit">Like</button>
+    </form>
     <hr>
 </body>
 </html>
