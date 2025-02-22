@@ -7,6 +7,10 @@
     <form action="/user/<%=q._id%>/like?_method=PUT" method="post">
         <button type="submit">Like</button>
     </form>
+    <form action="/user/<%=q._id%>/comment?_method=PUT" method="post">
+        <input name="comment" placeholder="Write a comment" required>
+        <button type="submit">comment</button>
+    </form>
     <hr>
 </body>
 </html>

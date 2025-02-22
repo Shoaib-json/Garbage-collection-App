@@ -90,15 +90,10 @@ router.get("/logout", (req, res, next) => {
 router.put("/:id/like", check, async (req, res) => {
     try {
       const postId = req.params.id;
-      const userId = req.user._id; // Ensure this is a valid ObjectId
-  
-      // Convert userId to ObjectId if it's not already
-      const userObjectId = new mongoose.Types.ObjectId(userId);
-  
-      // Update the post, ensuring likes is an array of ObjectIds
+      
       let updatedPost = await Community.findByIdAndUpdate(
         postId,
-        { $addToSet: { likes: userObjectId } }, // $addToSet prevents duplicate likes
+        { $addToSet: { likes: req.user._id } }, 
         { new: true, useFindAndModify: false }
       );
   
@@ -113,5 +108,25 @@ router.put("/:id/like", check, async (req, res) => {
       res.status(500).send("Server error");
     }
   });
+
+
+  router.put("/:id/comment" ,check , async (req,res)=>{
+    let {comment} = req.body;
+    let updatedPost = await Community.findByIdAndUpdate(
+        req.params._id,
+        { 
+          $push: { 
+            comments: { 
+              user: req.user.id, 
+              comment: comment 
+            } 
+          } 
+        },
+        { new: true } )
+      
+      console.log(req.user.id)
+      console.log(updatedPost);
+      res.send("commented");
+  })
   
 module.exports = router;
