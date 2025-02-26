@@ -1,0 +1,23 @@
+<% layout("./layouts/boilerplate.ejs") -%>
+
+<body>
+    <h2>Shop Input Form</h2>
+    <form action="/shop/submit" method="post" enctype="multipart/form-data">
+        <label for="caption">Caption:</label>
+        <input type="text" id="caption" name="caption" required><br><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image" multiple><br><br>
+
+  
+
+        <!-- <label for="address">Address ID:</label>
+        <input type="text" id="address" name="address"><br><br> -->
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

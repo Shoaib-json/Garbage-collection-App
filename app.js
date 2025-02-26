@@ -10,12 +10,12 @@ const flash = require('connect-flash');
 const session = require("express-session");
 const User  = require("./models/user.js");
 const {errorH} = require("./utils/error.js");
+const Shop = require('./models/shop.js');
 const helmet = require("helmet");
 
 require('dotenv').config();
 
-
-
+const shop = require("./router/shop.js")
 const user = require("./router/login.js");
 const list = require ("./router/list.js");
 const scrap = require("./router/scrap.js");
@@ -84,6 +84,7 @@ app.use("/re", scrap);
 app.use("/clean" , clean);
 app.use("/event" , event);
 app.use("/community" , community);
+app.use("/shop" , shop);
 
 app.all("*",(req,res)=>{
     let  message = " Page not found"
