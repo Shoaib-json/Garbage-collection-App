@@ -1,0 +1,41 @@
+<% layout("./layouts/boilerplate.ejs") -%>
+<h1>Your Cart</h1>
+
+<% if (cart && cart.length > 0) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Caption</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% cart.forEach(item => { %>
+        <tr>
+          <td><%= item.caption %></td>
+          <td>$<%= item.price %></td>
+          <td>
+            <form action="/cart/update/<%= item.productId %>" method="POST">
+              <input type="number" name="quantity" value="<%= item.quantity %>" min="1">
+              <button type="submit">Update</button>
+            </form>
+          </td>
+          <td>
+            <form action="/cart/remove/<%= item.productId %>" method="POST">
+              <button type="submit">Remove</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <h2>Total: $<%= total %></h2>
+  <form action="/orders/create" method="POST">
+    <button type="submit">Checkout</button>
+  </form>
+<% } else { %>
+  <p>Your cart is empty.</p>
+<% } %>

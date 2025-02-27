@@ -1,26 +1,40 @@
-const mongoose = require("mongoose");
-const User = require('./user');
-const Address = require('./address')
+const mongoose = require('mongoose');
 
-const shopSchema = new mongoose.Schema({
-    caption :{
-        type : String,
-        required : true
-    },
-    description:{
-        type :String,
-        required : true
-    },
-    image :[{
-        url:{type:String},
-        filename:{type : String , default : "image1 "}
-    }],
-    user: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-        }]
+const ShopSchema = new mongoose.Schema({
+  caption: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  category: {
+    type: String,
+    required: true,
+    default: "General"
+  },
+  stock: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  image: [
+    {
+      url: String,
+      filename: String
+    }
+  ],
+  user: {
+    // Reference to a User model if you have user accounts
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+}, { timestamps: true });
 
-});
-
-const Shop = new mongoose.model('Shop' , shopSchema);
-module.exports = Shop;
+module.exports = mongoose.model('Shop', ShopSchema);

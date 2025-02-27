@@ -1,26 +1,37 @@
-<% layout("./layouts/boilerplate.ejs")-%>
-<body>
-    <form action="/shop/add" method="get">
-        <button type="submit">Add your product</button>
-    </form>
-    
-    
-    <% if (q && q.length > 0) { %>
-        <% for (let p of q) { %>
-            <a href="/shop/<%= p._id %>">
-                <div class="event">
-                    <h2><%= p.caption %></h2>
-                    <% if (p.image && p.image.length > 0) { %>
-                        <img src="<%= p.image[0].url %>" alt="Event Image" width="200">
-                    <% } else { %>
-                        <p>No image available</p>
-                    <% } %>
-                </div>
-                <hr>
-            </a>
-        <% } %>
-    <% } else { %>
-        <p>No posts available.</p>
-    <% } %>
-    
-</body>
+<% layout("./layouts/boilerplate.ejs") -%>
+<h1>All Products</h1>
+
+<!-- Search & Filter -->
+<form action="/shop" method="GET">
+  <input type="text" name="search" placeholder="Search...">
+  <select name="category">
+    <option value="">All Categories</option>
+    <option value="General">General</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Fashion">Fashion</option>
+    <!-- Add more categories -->
+  </select>
+  <button type="submit">Filter</button>
+</form>
+
+<form action="/shop/add" method="get">
+  <button type="submit">Add a Product</button>
+</form>
+
+<% if (q && q.length > 0) { %>
+  <% q.forEach((p) => { %>
+    <div>
+      <h2><a href="/shop/<%= p._id %>"><%= p.caption %></a></h2>
+      <p>Price: $<%= p.price %></p>
+      <p>Category: <%= p.category %></p>
+      <% if (p.image && p.image.length > 0) { %>
+        <img src="<%= p.image[0].url %>" width="200">
+      <% } else { %>
+        <p>No image available</p>
+      <% } %>
+      <hr>
+    </div>
+  <% }) %>
+<% } else { %>
+  <p>No products available.</p>
+<% } %>

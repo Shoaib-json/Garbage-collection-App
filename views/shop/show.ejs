@@ -1,10 +1,19 @@
-<% layout("./layouts/boilerplate.ejs")-%>
-<body>
-    <%for(let i =0 ; i< q.image.length ; i++){%>
-        <img src="<%= q.image[i].url %>" width="100px">
-    <%}%>
-    <h4><%= q.caption %></h4>
-    <p><%= q.description %></p>
-    <button><a href='/user/address'>Book</a></button>
-    
-</body>
+<% layout("./layouts/boilerplate.ejs") -%>
+<h1>Product Details</h1>
+
+<% if (q && q.image && q.image.length > 0) { %>
+  <% q.image.forEach((img) => { %>
+    <img src="<%= img.url %>" width="150" alt="Product Image">
+  <% }) %>
+<% } %>
+
+<h2><%= q.caption %></h2>
+<p><%= q.description %></p>
+<p>Price: $<%= q.price %></p>
+<p>Category: <%= q.category %></p>
+<p>In Stock: <%= q.stock %></p>
+
+<!-- Add to Cart -->
+<form action="/cart/add/<%= q._id %>" method="POST">
+  <button type="submit">Add to Cart</button>
+</form>
