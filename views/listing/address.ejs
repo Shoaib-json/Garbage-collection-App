@@ -1,14 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Address</title>
-</head>
+<% layout("/layouts/boilerplate") -%>
+
 <body>
+    <h1>User Details</h1>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>Username:</strong> <%= user.username %></p>
+    <p><strong>Created At:</strong> <%= user.createAt.toDateString() %></p>
+
+    <h2>Addresses</h2>
+    <% if (user.address.length > 0) { %>
+        <ul>
+            <% user.address.forEach(addr => { %>
+                <li>
+                    <p><strong>City:</strong> <%= addr.city %></p>
+                    <p><strong>Street:</strong> <%= addr.street %></p>
+                    <p><strong>Pincode:</strong> <%= addr.pincode %></p>
+                    <p><strong>House No:</strong> <%= addr.houseNo %></p>
+                    <p><strong>Phone Number:</strong> <%= addr.phoneNum %></p>
+                </li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No addresses found.</p>
+    <% } %>
+    
+    //this form for new address 
     <div class="container">
         <h1>Add Address</h1>
-        <form action="/user/<%= q %>" method="POST">
+        <form action="/user/<%= user.id %>" method="POST">
             
             <div class="form-group">
                 <label for="city">City:</label>

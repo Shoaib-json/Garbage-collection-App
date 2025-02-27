@@ -86,16 +86,16 @@ app.use("/event" , event);
 app.use("/community" , community);
 app.use("/shop" , shop);
 
-app.all("*",(req,res)=>{
-    let  message = " Page not found"
-    res.render("./listing/notfound.ejs" , {message})
-})
+// app.all("*",(err,req,res)=>{
+//     // let  message = " Page not found"
+//     res.json(err);
+// })
 
 
-app.use((err ,req, res, next)=>{
-    // let{status=404, message = "not found"} = err;
-    res.json(err);
-})
+// app.use((err ,req, res, next)=>{
+//     // let{status=404, message = "not found"} = err;
+//     res.json(err);
+// })
 
 
 app.listen(8080 ,(req,res)=>{

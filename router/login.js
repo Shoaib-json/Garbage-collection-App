@@ -59,9 +59,9 @@ router.post(
 );
 
 router.get("/address", check ,async(req,res) =>{
-    const q = await User.findById(req.user.id).populate('address');
-    console.log(q)
-    res.render("./listing/address.ejs" , {q});
+    const user = await User.findById(req.user.id).populate("address");
+        
+    res.render("./listing/address.ejs" , {user});
 });
 
 router.post("/:id" , async (req,res) =>{
