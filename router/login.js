@@ -58,8 +58,9 @@ router.post(
     }
 );
 
-router.get("/address", check ,(req,res) =>{
-    const q = req.user._id;
+router.get("/address", check ,async(req,res) =>{
+    const q = await User.findById(req.user.id).populate('address');
+    console.log(q)
     res.render("./listing/address.ejs" , {q});
 });
 

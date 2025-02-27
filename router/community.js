@@ -37,6 +37,6 @@ router.post("/submit" ,check, upload.single("image"), async (req,res) =>{
 router.get("/:id" , async (req,res) =>{
     let q = await Community.findById(req.params.id);
     res.render("./community/show.ejs" , {q});
-} )
+});
 
 module.exports = router;

@@ -1,0 +1,10 @@
+<% layout("./layouts/boilerplate.ejs")-%>
+<body>
+    <%for(let i =0 ; i< q.image.length ; i++){%>
+        <img src="<%= q.image[i].url %>" width="100px">
+    <%}%>
+    <h4><%= q.caption %></h4>
+    <p><%= q.description %></p>
+    <button><a href='/user/address'>Book</a></button>
+    
+</body>

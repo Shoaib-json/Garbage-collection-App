@@ -15,10 +15,10 @@ const shopSchema = new mongoose.Schema({
         url:{type:String},
         filename:{type : String , default : "image1 "}
     }],
-    user: {
+    user: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-        }
+        }]
 
 });
 

@@ -3,4 +3,24 @@
     <form action="/shop/add" method="get">
         <button type="submit">Add your product</button>
     </form>
+    
+    
+    <% if (q && q.length > 0) { %>
+        <% for (let p of q) { %>
+            <a href="/shop/<%= p._id %>">
+                <div class="event">
+                    <h2><%= p.caption %></h2>
+                    <% if (p.image && p.image.length > 0) { %>
+                        <img src="<%= p.image[0].url %>" alt="Event Image" width="200">
+                    <% } else { %>
+                        <p>No image available</p>
+                    <% } %>
+                </div>
+                <hr>
+            </a>
+        <% } %>
+    <% } else { %>
+        <p>No posts available.</p>
+    <% } %>
+    
 </body>
