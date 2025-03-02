@@ -39,12 +39,10 @@ app.use(methodOverride("_method"));
 
 // Connect to MongoDB
 async function main() {
-    await mongoose.connect(process.env.DB_CODE, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
+    await mongoose.connect(process.env.DB_CODE); 
     console.log("DB is connected");
 }
+
 main().catch(err => console.log(err));
 
 // Session configuration

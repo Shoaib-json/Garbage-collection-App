@@ -10,7 +10,7 @@ const upload = multer({ storage });
 router.get("/" , async(req,res) =>{
     const q = await Event.find({})
     .populate('user');
-    console.log(q);
+   
     res.render("./event/event.ejs", {q});
 });
 
@@ -20,8 +20,8 @@ router.get("/host" , check , (req,res) =>{
 
 router.post("/create-post", upload.single("poster"), async (req, res) => {
   try {
-      console.log("File:", req.file);  // Debugging: Check uploaded file
-      console.log("Body:", req.body);  // Debugging: Check form data
+      console.log("File:", req.file);  
+      console.log("Body:", req.body);  
 
       if (!req.file) {
           return res.status(400).json({ error: "No file uploaded" });
@@ -52,21 +52,30 @@ router.post("/create-post", upload.single("poster"), async (req, res) => {
 
 
 router.put("/:id", check, async (req, res) => {
-    try {
-      let updatedEvent = await Event.findByIdAndUpdate(
-        req.params.id,
-        {  enroll: { user: req.user._id  }}, // Prevents duplicate enrollments
-        { new: true }
-      );
-  
-      if (!updatedEvent) return res.status(404).send("Event not found");
-  
-      res.json(updatedEvent); 
-    } catch (error) {
+  try {
+      let event = await Event.findById(req.params.id);
+      if (!event) return res.status(404).json({ message: "Event not found" });
+
+      if (event.enroll?.user?.toString() === req.user._id.toString()) {
+          return res.status(400).json({ message: "User is already enrolled" });
+      }
+
+      // If enroll object doesn't exist, initialize it
+      if (!event.enroll) {
+          event.enroll = {};
+      }
+
+      // Update the enroll user field
+      event.enroll.user = req.user._id;
+      let updatedEvent = await event.save();
+      req.flash("success" , "Enrolled");
+      res.redirect("/event");
+      
+  } catch (error) {
       console.error(error);
-      res.status(500).send("Internal Server Error");
-    }
-  });
-  
+      res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 module.exports = router;
