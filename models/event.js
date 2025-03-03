@@ -30,12 +30,10 @@ const eventSchema = mongoose.Schema({
         require : true
     },
     enroll: [
-        {
-          user: {
-            type: String, 
-           default : "admin"
-          },
-        },
+        
+        {  user : {
+            type: String
+        }},
       ]
 
 });

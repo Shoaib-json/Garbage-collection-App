@@ -60,12 +60,12 @@ router.put("/:id", check, async (req, res) => {
           return res.status(400).json({ message: "User is already enrolled" });
       }
 
-      // If enroll object doesn't exist, initialize it
+    
       if (!event.enroll) {
           event.enroll = {};
       }
 
-      // Update the enroll user field
+     
       event.enroll.user = req.user._id;
       let updatedEvent = await event.save();
       req.flash("success" , "Enrolled");
@@ -75,6 +75,12 @@ router.put("/:id", check, async (req, res) => {
       console.error(error);
       res.status(500).json({ message: "Server error" });
   }
+});
+
+router.delete("/:id/delete" , async (req,res)=>{
+    let q = await Event.findByIdAndDelete(req.params.id);
+    console.log(q);
+    res.redirect("/event");
 });
 
 

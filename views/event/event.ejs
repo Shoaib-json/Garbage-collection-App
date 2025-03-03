@@ -16,6 +16,12 @@
                 <form method="post" action="/event/<%= p._id %>?_method=PUT">
                     <button type="submit">Enroll</button>
                 </form>
+                <% if (currUser && currUser._id.equals(p.user._id)){%>
+            
+                <form method="post" action="/event/<%= p._id %>/delete?_method=DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+                <%}%>
             </div>
             <hr>
         <% } %>
