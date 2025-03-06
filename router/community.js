@@ -1,7 +1,7 @@
 const express = require('express');
 const router =  express.Router();
 const Community = require("../models/community");
-const {check} = require("../utils/middleware");
+const {check , saveRedirectUrl } = require("../utils/middleware");
 const multer  = require('multer');
 const {storage} = require("../cloudconfig"); 
 const upload = multer({ storage });
@@ -80,6 +80,12 @@ router.put("/:id/comment" ,check , async (req,res)=>{
       console.log(req.user.id)
       console.log(updatedPost);
       res.redirect(`/community/${req.params.id}`);
+  });
+
+  router.delete("/:id/delete" , async (req,res)=>{
+    let q = await Community.findByIdAndDelete(req.params.id);
+    console.log(q);
+    res.redirect("/community");
   })
 
 module.exports = router;

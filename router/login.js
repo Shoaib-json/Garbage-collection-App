@@ -2,7 +2,7 @@ const express  = require('express');
 const router = express.Router();
 const User  = require("../models/user.js");
 const passport = require("passport");
-const { check }  = require("../utils/middleware.js")
+const { check , saveRedirectUrl , logIn   }  = require("../utils/middleware.js")
 const Address  = require("../models/address.js");
 const Community = require('../models/community.js');
 
@@ -48,13 +48,10 @@ router.post(
     passport.authenticate("local", {
         failureRedirect: "/user/log", // Redirect to '/log' if authentication fails
         failureFlash: true, // Enable flash messages on failure
-        successRedirect: "/", 
+        
         failureMessage: true, // Provide a failure message
-    }),
-    async (req, res, next) => {
-        
-       console.log(currUser);
-        
+    }),(req,res)=>{
+        res.redirect("/")
     }
 );
 

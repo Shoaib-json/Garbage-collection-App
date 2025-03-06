@@ -10,13 +10,12 @@ const flash = require('connect-flash');
 const session = require("express-session");
 const User  = require("./models/user.js");
 const { errorH } = require("./utils/error.js");
-const Shop = require('./models/shop.js');
 const helmet = require("helmet");
 
 require('dotenv').config();
 
-// Importing routes
-const shop = require("./router/shop.js");
+
+
 const user = require("./router/login.js");
 const list = require ("./router/list.js");
 const scrap = require("./router/scrap.js");
@@ -81,6 +80,14 @@ app.use((req, res, next) => {
     res.locals.currUser = req.user || null;
     next();
 });
+app.use((req, res, next) => {
+    req.session.redirectUrl = req.originalUrl; // Example: Store the current URL
+    next();
+});
+
+
+
+
 
 // Mounting routes
 app.use("/", list);
@@ -89,11 +96,12 @@ app.use("/re", scrap);
 app.use("/clean", clean);
 app.use("/event", event);
 app.use("/community", community);
-app.use("/shop", shop);
+
 
 // (Optional) Global error handler examples:
-// app.all("*", (err, req, res) => {
+// app.all("*", (err, req, res,next) => {
 //     res.json(err);
+//     next();
 // });
 // app.use((err, req, res, next) => {
 //     res.json(err);

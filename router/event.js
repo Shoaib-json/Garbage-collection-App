@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {check} = require("../utils/middleware");
+const {check,saveRedirectUrl} = require("../utils/middleware");
 const Event = require("../models/event");
 const User = require("../models/user");
 const multer  = require('multer');
@@ -14,11 +14,11 @@ router.get("/" , async(req,res) =>{
     res.render("./event/event.ejs", {q});
 });
 
-router.get("/host" , check , (req,res) =>{
+router.get("/host" , check, saveRedirectUrl  , (req,res) =>{
     res.render("./event/host.ejs")
 })
 
-router.post("/create-post", upload.single("poster"), async (req, res) => {
+router.post("/create-post",check, upload.single("poster"), async (req, res) => {
   try {
       console.log("File:", req.file);  
       console.log("Body:", req.body);  
