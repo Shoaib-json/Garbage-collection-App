@@ -37,7 +37,7 @@ router.post("/create-post",check, upload.single("poster"), async (req, res) => {
               filename: req.file.filename || "poster101"
           },
           name: req.body.name || "Event",
-          enroll :req.user._id
+          enroll : req.user._id
       });
 
       await newEvent.save();

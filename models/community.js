@@ -35,7 +35,10 @@ const communitySchema = new mongoose.Schema({
             type: String,
             
         }
-    }]
+    }],
+    description:{
+        type:String
+    }
 }, { timestamps: true });
 
 const Community = mongoose.model("Community", communitySchema);

@@ -6,13 +6,14 @@
     <% if (q && q.length > 0) { %>
         <% for (let p of q) { %>
             <div class="event">
+               
+                <img src="<%= p.poster.url %>" alt="Event Image" width="200">
                 <h2><%= p.name %></h2>
                 <p><strong>Description:</strong> <%= p.description %></p>
                 <p><strong>Host:</strong> <%= p.user ? p.user.username : 'Unknown Host' %></p>
 
                 <p><strong>Address:</strong> <%= p.address.city %>, <%= p.address.country %>, <%= p.address.place %></p>
                 <p><strong>Date:</strong> <%= new Date(p.date).toLocaleDateString("en-IN", { year: 'numeric', month: '2-digit', day: '2-digit' }) %></p>
-                <img src="<%= p.poster.url %>" alt="Event Image" width="200">
                 <form method="post" action="/event/<%= p._id %>?_method=PUT">
                     <button type="submit">Enroll</button>
                 </form>

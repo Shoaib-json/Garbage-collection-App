@@ -22,15 +22,17 @@ router.post("/submit" ,check, upload.single("image"), async (req,res) =>{
     if(!req.user){
         res.flash("success" , "first login")
     }
-    let {caption} =req.body ;
+    let {caption , description} =req.body ;
     let post = new Community({
         image: {
             url: req.file.path, // Store the file path in DB
             filename: req.file.filename || "poster101"
         },
         caption: caption,
-        user : req.user._id
-    })
+        user : req.user._id,
+        description:description   
+       })
+       console.log(post)
     await post.save();
     
     res.redirect("/community")
@@ -39,6 +41,7 @@ router.post("/submit" ,check, upload.single("image"), async (req,res) =>{
 router.get("/:id" , async (req,res) =>{
     let q = await Community.findById(req.params.id);
     res.render("./community/show.ejs" , {q});
+    console.log(q);
 });
 
 router.put("/:id/like", check, async (req, res) => {
@@ -56,7 +59,8 @@ router.put("/:id/like", check, async (req, res) => {
       }
   
       console.log(updatedPost);
-      res.send("Liked");
+      req.flash("success", "post liked")
+      res.redirect(`/community/${postId}`);
     } catch (err) {
       console.error("Error liking post:", err);
       res.status(500).send("Server error");

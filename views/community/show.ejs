@@ -11,7 +11,9 @@
           <div class="event">
             <h2 class="mb-4"><%= q.caption %></h2>
             <img src="<%= q.image.url %>" alt="Event Image" class="event-image img-fluid">
+            
           </div>
+          <h5><%= q.description %></h5>
 
           
           <% if (currUser && currUser._id.equals(q.user._id)){%>

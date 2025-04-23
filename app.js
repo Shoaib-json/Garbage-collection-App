@@ -11,6 +11,10 @@ const session = require("express-session");
 const User  = require("./models/user.js");
 const { errorH } = require("./utils/error.js");
 const helmet = require("helmet");
+const http = require('http');
+const socketio = require('socket.io');
+const server = http.createServer(app);
+const io = socketio(server);
 
 require('dotenv').config();
 
@@ -87,6 +91,18 @@ app.use((req, res, next) => {
 
 
 
+io.on("connection", (socket) => {
+    console.log("User connected:", socket.id);
+
+    socket.on("send-location", (data) => {
+        io.emit("receive-location", { id: socket.id, ...data });
+    });
+
+    socket.on("disconnect", () => {
+        console.log("User disconnected:", socket.id);
+        io.emit("user-disconnected", { id: socket.id });
+    });
+});
 
 
 // Mounting routes
@@ -98,16 +114,16 @@ app.use("/event", event);
 app.use("/community", community);
 
 
-// (Optional) Global error handler examples:
-// app.all("*", (err, req, res,next) => {
-//     res.json(err);
-//     next();
-// });
-// app.use((err, req, res, next) => {
-//     res.json(err);
-// });
+
+app.all("*", (err, req, res,next) => {
+    res.render("./listing/error.ejs");
+    next();
+});
+app.use((err, req, res, next) => {
+    res.json(err);
+});
 
 // Start the server
-app.listen(8080, () => {
+server.listen(8080, () => {
     console.log("Port is listening on 8080");
 });

@@ -19,7 +19,7 @@ router.post("/submit" ,check, async(req,res) =>{
         });
         q.save();
         console.log(q);
-        res.send("Submitted");
+        res.redirect("/map");
     }catch (err) {
         console.log(err);
         

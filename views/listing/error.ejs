@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Error</title>
+  <style>
+    body {
+      background-color: #fff0f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .error-box {
+      background-color: #ffe0e0;
+      border: 1px solid #ff4c4c;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .error-box h1 {
+      color: #c0392b;
+      margin-bottom: 0.5rem;
+    }
+    .error-box p {
+      color: #555;
+    }
+    .error-box a {
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+      color: white;
+      background-color: #c0392b;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
+    .error-box a:hover {
+      background-color: #a93226;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-box">
+    <h1><%= statusCode || 500 %> - Something went wrong</h1>
+    <p><%= message || "Unexpected error occurred. Please try again later." %></p>
+    <a href="/">Back to Home</a>
+  </div>
+</body>
+</html>

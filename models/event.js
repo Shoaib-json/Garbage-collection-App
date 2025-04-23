@@ -29,13 +29,15 @@ const eventSchema = mongoose.Schema({
         default : "Event",
         require : true
     },
-    enroll: [
-        
-        {  user : {
-            type: String
-        }},
-      ]
-
+    enroll: {
+        type: [{
+          user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+          }
+        }],
+        default: [] // Initialize as empty array by default
+      }
 });
 
 const Event = new mongoose.model('Event' , eventSchema);
